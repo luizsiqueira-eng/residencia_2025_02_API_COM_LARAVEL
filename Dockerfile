@@ -1,5 +1,5 @@
 FROM php:8.0-fpm
-WORKDIR /var/www/app/
+WORKDIR /var/www/app
 
 ENV ACCEPT_EULA=Y
 ENV TZ=America/Recife

@@ -6,12 +6,13 @@ services:
       context: .
       dockerfile: Dockerfile
     image: app
-    container_name: agenda
+    container_name: agendas
+    user: "${UID}:${GID}"
     ports:
       - "80:80"
       - "443:443"
     volumes:
-      - ./src:/var/www/app/
+      - ./src:/var/www/app
     networks:
       - app
   db:
@@ -32,8 +33,6 @@ services:
       - ./db/:/var/lib/mysql
     networks:
       - app
-volumes:
-  app:
 networks:
   app:
     driver: bridge
