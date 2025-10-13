@@ -6,6 +6,6 @@ namespace Src\App\Enums;
 enum ConteudoStatusEnum:String {
     case statusEscrito = "escrito";
     case statusAprovado = "aprovado";
-    case statusAprovado = "reprovado";
+    case statusReprovado = "reprovado";
 
 }
