@@ -11,6 +11,8 @@ class Conteudo extends Model
 
     protected $fillable = [
         "papel",
-        
+        "conteudo",
+        "status",
+        "motivo_reprovacao"
     ];
 }
