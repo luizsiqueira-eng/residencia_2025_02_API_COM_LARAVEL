@@ -27,11 +27,20 @@ class ConteudoRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            'papel' => 'required|string|max:255',
-            'conteudo' => 'required|string|min:20',
-            'status' => ['required', Rule::in(['aprovado', 'reprovado'])],
-            'motivo_reprovacao' => 'nullable|string|min:20|max:255', Rule::requiredIf($this->input('status') === 'reprovado')
-        ];
+         if ($this->isMethod('post')) {
+            return [
+                'papel' => 'required|string|max:255',
+                'conteudo' => 'required|string|min:20',
+            ];
+        }
+
+        if ($this->isMethod('put') || $this->isMethod('patch')) {
+            return [
+                'papel' => 'sometimes|string|max:255',
+                'conteudo' => 'sometimes|string|min:20',
+            ];
+        }
+
+        return [];
     }
 }

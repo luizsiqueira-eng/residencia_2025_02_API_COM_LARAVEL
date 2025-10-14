@@ -17,7 +17,7 @@ class ConteudoSeeder extends Seeder
     {
         Conteudo::create([
             'papel' => 'redator',
-            'conteudo' => 'Este é o primeiro conteúdo de exemplo.',
+            'conteudo' => 'Este é o primeiro conteúdo de exemplo. Conteudo totalmente de exemplo para testes.',
             'status' => ConteudoStatusEnum::ESCRITO,
         ]);
     }

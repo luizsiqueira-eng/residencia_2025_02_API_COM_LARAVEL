@@ -19,22 +19,33 @@ class Conteudo extends Model
     ];
 
     protected $casts = [
-        'status' => ConteudoStatusEnum::Enum,
+        'id' => 'integer',
     ];
-
+    
     protected $attributes = [
         'status'=> ConteudoStatusEnum::ESCRITO,
     ];
 
+    protected static function booted()
+    {
+        static::deleting(function ($conteudo) {
+            if ($conteudo->status === ConteudoStatusEnum::APROVADO) {
+                return false;
+            }
+        });
+    }
+
      public function aprovar() {
 
         if ($this->status !== ConteudoStatusEnum::ESCRITO) {
-            throw new Exception('Ação de reprovar não permitida para o estado atual.');
+            
+            throw new Exception('Ação de aprovar não permitida para o estado atual.');
         }
 
         $this->status = ConteudoStatusEnum::APROVADO;
+        $this->motivo_reprovacao = null; 
     
-        return $this->save(); 
+        return $this->save();
      }
 
     public function reprovar(string $motivo_reprovacao) {
