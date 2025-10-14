@@ -111,8 +111,10 @@ class ConteudoController extends Controller
      * @param  \App\Models\Conteudo  $conteudo
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Conteudo $conteudo)
+    public function destroy($id)
     {
+        $conteudo = Conteudo::findOrFail($id);
+        
         if ($conteudo->status === \App\Enums\ConteudoStatusEnum::APROVADO) {
             return response()->json(['error' => 'Conteúdos aprovados não podem ser excluídos.'], 422);
         }
