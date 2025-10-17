@@ -41,9 +41,10 @@ class ConteudoController extends Controller
      * @param  \App\Models\Conteudo  $conteudo
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Conteudo $conteudo)
+    public function show(Conteudo $conteudo, $id)
     {
-        return response()->json($conteudo::all(), 200);
+        $conteudo = Conteudo::findOrFail($id);
+        return response()->json($conteudo, 200);
     }
 
     /**
@@ -93,11 +94,13 @@ class ConteudoController extends Controller
         $data = $request->validated();
 
         try {
+
             if (isset($data['conteudo'])) {
                 $conteudo->statusEscritoAposEditarConteudoReprovado();
-                $conteudo->conteudo = $data['conteudo'];
-                $conteudo->save();
             }
+
+            $conteudo->update($data);
+
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
@@ -121,6 +124,6 @@ class ConteudoController extends Controller
 
         $conteudo->delete();
 
-        return response()->json(null, 204);
+        return response()->json("Conteúdo deletado.", 200);
     }
 }
