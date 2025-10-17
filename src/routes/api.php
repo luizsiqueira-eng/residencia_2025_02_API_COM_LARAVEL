@@ -10,7 +10,7 @@ use App\Http\Controllers\ConteudoController;
 Route::get("/conteudos", [ConteudoController::class,"index"])->name("Listar conteúdos");
 Route::post("/conteudos", [ConteudoController::class,"store"])->name("Criar conteúdo");
 Route::get("/conteudos/{id}", [ConteudoController::class,"show"])->name("Listar apenas um conteúdo");
-Route::put("/conteudos/{id}", [ConteudoController::class,"update"])->name("Atualiza apenas um conteúdo");
+Route::put("/conteudos/{conteudo}", [ConteudoController::class,"update"])->name("Atualiza apenas um conteúdo");
 Route::delete("/conteudos/{id}", [ConteudoController::class,"destroy"])->name("Deleta um conteúdo");
 
 // rota para aprovar e reprovar
