@@ -82,7 +82,7 @@ Entrega: ao aprovar/reprovar, novo registro na conteudo_logs.
 
 ⸻
 
-10) Testes rápidos (opcional) 
+10) Testes rápidos (opcional)  - Concluído Parcialmente, apenas testes unitários do Conteudo Controller. 
 	•	Testes de feature para: criar, aprovar, reprovar, deletar.
 	•	Testar transições inválidas (ex.: aprovar algo já aprovado).
 
@@ -90,6 +90,6 @@ Entrega: php artisan test verde.
 
 ⸻
 
-11) Postman/Insomnia (opcional)
+11) Postman/Insomnia - Parcialmente completo. 
 	•	Criar coleção com as 5 rotas.
 	•	Incluir exemplos de body para cada ação.
