@@ -1,13 +1,13 @@
 Lista de Exercícios (passo a passo)
 
-1) Preparação do projeto
+1) Preparação do projeto - ETAPA CONCLUIDA!
 	1.	Criar um novo projeto (ou usar um já existente).
 	2.	Configurar a conexão com banco local.
 	3.	Criar banco e rodar migrações iniciais.
 
 ⸻
 
-2) Modelagem e Migration
+2) Modelagem e Migration - ETAPA CONCLUIDA!
 	1.	Criar migration para a tabela conteudos com os campos:
 	•	id
 	•	papel (string)
@@ -19,14 +19,14 @@ Lista de Exercícios (passo a passo)
 
 ⸻
 
-3) Model
+3) Model - ETAPA CONCLUIDA!
 	1.	Criar o model Conteudo.
 	2.	Definir $fillable com: papel, conteudo, status, motivo_reprovacao.
 
 ⸻
 
 
-4) Regras de negócio (estado)
+4) Regras de negócio (estado) - ETAPA CONCLUIDA!
 	1.	Status inicial sempre escrito.
 	2.	Aprovar só muda escrito → aprovado.
 	3.	Reprovar só muda escrito → reprovado (exigir motivo).
@@ -34,9 +34,9 @@ Lista de Exercícios (passo a passo)
 
 ⸻
 
-5) Rotas (API)
+5) Rotas (API) - ETAPA CONCLUIDA!
 
-Criar rotas REST (em routes/api.php):
+Criar rotas REST (em routes/api.php): 
 	•	POST /conteudos → criar
 	•	GET /conteudos → listar
 	•	GET /conteudos/{id} → visualizar
@@ -46,7 +46,7 @@ Criar rotas REST (em routes/api.php):
 
 ⸻
 
-6) Controller (ações mínimas)
+6) Controller (ações mínimas) - ETAPA CONCLUIDA!
 
 Implementar métodos:
 	•	create: cria o conteúdo com status = escrito (pode simular integração com IA).
@@ -60,7 +60,7 @@ Entrega: respostas HTTP corretas (201, 200, 204, 400/422 quando inválido).
 
 ⸻
 
-7) Validações
+7) Validações - ETAPA CONCLUIDA!
 	•	papel: obrigatório, string.
 	•	conteudo: obrigatório (text).
 	•	reprovar: campo motivo_reprovacao é obrigatório.
@@ -68,13 +68,13 @@ Entrega: respostas HTTP corretas (201, 200, 204, 400/422 quando inválido).
 ⸻
 
 *********************************************************EXTRAS*************************
-8) Filtros e paginação (extra)
+8) Filtros e paginação (extra) - ETAPA CONCLUIDA!
 	•	GET /conteudos?status=escrito&papel=marketing&page=1&per_page=10
 	•	Retornar data + meta (página, total, por página).
 
 ⸻
 
-9) Auditoria (extra)
+9) Auditoria (extra) - ETAPA CONCLUIDA!
 	•	Criar tabela conteudo_logs para registrar: ação, usuário (se houver), data/hora.
 	•	Logar em: criar, aprovar, reprovar, deletar.
 
@@ -82,7 +82,7 @@ Entrega: ao aprovar/reprovar, novo registro na conteudo_logs.
 
 ⸻
 
-10) Testes rápidos (opcional)
+10) Testes rápidos (opcional)  - Concluído Parcialmente, apenas testes unitários do Conteudo Controller. 
 	•	Testes de feature para: criar, aprovar, reprovar, deletar.
 	•	Testar transições inválidas (ex.: aprovar algo já aprovado).
 
@@ -90,6 +90,6 @@ Entrega: php artisan test verde.
 
 ⸻
 
-11) Postman/Insomnia (opcional)
+11) Postman/Insomnia - Parcialmente completo. 
 	•	Criar coleção com as 5 rotas.
 	•	Incluir exemplos de body para cada ação.

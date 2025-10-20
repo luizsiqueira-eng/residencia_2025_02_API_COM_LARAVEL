@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Agenda extends Model
+class ConteudoLog extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'nome',
-        'telefone',
+        'conteudo_id',
+        'acao',
+        'detalhes',
     ];
 }
