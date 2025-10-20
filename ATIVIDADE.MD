@@ -68,13 +68,13 @@ Entrega: respostas HTTP corretas (201, 200, 204, 400/422 quando inválido).
 ⸻
 
 *********************************************************EXTRAS*************************
-8) Filtros e paginação (extra)
+8) Filtros e paginação (extra) - ETAPA CONCLUIDA!
 	•	GET /conteudos?status=escrito&papel=marketing&page=1&per_page=10
 	•	Retornar data + meta (página, total, por página).
 
 ⸻
 
-9) Auditoria (extra)
+9) Auditoria (extra) - ETAPA CONCLUIDA!
 	•	Criar tabela conteudo_logs para registrar: ação, usuário (se houver), data/hora.
 	•	Logar em: criar, aprovar, reprovar, deletar.
 

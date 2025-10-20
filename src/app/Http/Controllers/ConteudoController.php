@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Conteudo;
+use App\Models\ConteudoLog;
 use Exception;
 use App\Http\Requests\ConteudoRequest;
 use Illuminate\Http\JsonResponse;
@@ -16,9 +17,22 @@ class ConteudoController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Conteudo::all(), 200);
+        $query = Conteudo::query();
+
+        if ($request->has('status')) {
+            $query->where('status', $request->input('status'));
+        }
+
+        if ($request->has('papel')) {
+            $query->where('papel', $request->input('papel'));
+        }
+
+        $perPage = $request->input('per_page', 10);
+        $conteudos = $query->paginate($perPage);
+
+        return response()->json($conteudos, 200);
     }
 
 
@@ -32,6 +46,10 @@ class ConteudoController extends Controller
     public function store(ConteudoRequest $request)
     {
         $conteudo = Conteudo::create($request->validated());
+        ConteudoLog::create([
+            'conteudo_id' => $conteudo->id,
+            'acao' => 'criar',
+        ]);
         return response()->json($conteudo, 201); 
     }
 
@@ -44,6 +62,7 @@ class ConteudoController extends Controller
     public function show(Conteudo $conteudo, $id)
     {
         $conteudo = Conteudo::findOrFail($id);
+        
         return response()->json($conteudo, 200);
     }
 
@@ -57,6 +76,10 @@ class ConteudoController extends Controller
     {
         try {
             $conteudo->aprovar();
+            ConteudoLog::create([
+                'conteudo_id' => $conteudo->id,
+                'acao' => 'aprovar',
+            ]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
@@ -75,6 +98,11 @@ class ConteudoController extends Controller
         try {
             $validated = $request->validate(['motivo_reprovacao' => 'required|string']);
             $conteudo->reprovar($validated['motivo_reprovacao']);
+            ConteudoLog::create([
+                'conteudo_id' => $conteudo->id,
+                'acao' => 'reprovar',
+                'detalhes' => 'Motivo: ' . $validated['motivo_reprovacao'],
+            ]);
         } catch (Exception $e) {
             return response()->json(['error' => $e->getMessage()], 422);
         }
@@ -114,16 +142,23 @@ class ConteudoController extends Controller
      * @param  \App\Models\Conteudo  $conteudo
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy(Conteudo $conteudo)
     {
-        $conteudo = Conteudo::findOrFail($id);
         
         if ($conteudo->status === \App\Enums\ConteudoStatusEnum::APROVADO) {
             return response()->json(['error' => 'Conteúdos aprovados não podem ser excluídos.'], 422);
         }
-
+        
+        $conteudoId = $conteudo->id;
         $conteudo->delete();
 
-        return response()->json("Conteúdo deletado.", 200);
+         ConteudoLog::create([
+            'conteudo_id' => $conteudoId,
+            'acao' => 'deletar',
+        ]);
+
+        
+
+        return response()->json(null, 204);
     }
 }
